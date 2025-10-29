@@ -6,7 +6,7 @@
 /*   By: usuario <usuario@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 13:48:10 by usuario           #+#    #+#             */
-/*   Updated: 2025/10/29 10:05:27 by usuario          ###   ########.fr       */
+/*   Updated: 2025/10/29 23:11:52 by usuario          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,30 @@ void	check_format(va_list va, char *str, size_t *count)
 {
 	char	*s;
 	char	c;
+	int		i;
 
+	i = 0;
 	if (*str == 'c')
 	{
 		c = va_arg(va, int);
 		write(1, &c, 1);
 		(*count)++;
 	}
+	if (*str == '%')
+	{
+		write(1, str, 1);
+		(*count)++;
+	}
+	s = va_arg(va, char *);
+	if (s == NULL)
+        s = "(null)"; 
 	if (*str == 's')
 	{
-		s = va_arg(va, char *);
-		while (*s)
+		while (s[i])
 		{
-			write(1, &s, 1);
-			s++;
+			write(1, &s[i], 1);
 			(*count)++;
+			i++;
 		}
 	}
 }
@@ -54,10 +63,12 @@ int	ft_printf(char const *fm, ...)
 		{
 			fm++;
 			check_format(args, (char *)fm, &count);
+			fm++;
 		}
 		count++;
 		write(1, fm, 1);
 		fm++;
+
 	}
 	va_end(args);
 	return (count);
@@ -88,9 +99,9 @@ int main(void)
 	printf("Retornos: ft=%d  printf=%d\n\n", total1, total2);
 
 	// 4️⃣ %d y %i
-	//total1 = ft_printf("Enteros: %d y %i\n", num, 42);
-	//total2 = printf("Enteros: %d y %i\n", num, 42);
-	//printf("Retornos: ft=%d  printf=%d\n\n", total1, total2);
+	total1 = ft_printf("Enteros: %d y %i\n", num, 42);
+	total2 = printf("Enteros: %d y %i\n", num, 42);
+	printf("Retornos: ft=%d  printf=%d\n\n", total1, total2);
 
 	// 5️⃣ %u
 	//total1 = ft_printf("Unsigned: %u\n", unum);
