@@ -6,7 +6,7 @@
 /*   By: usuario <usuario@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 11:47:47 by usuario           #+#    #+#             */
-/*   Updated: 2025/10/30 15:32:17 by usuario          ###   ########.fr       */
+/*   Updated: 2025/11/03 11:43:00 by usuario          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_hex(void *str, size_t *count)
 	hex = "0123456789abcdef";
 	write(1, "0x", 2);
 	*count += 2;
-	if (n == 0)
+	if (str == 0)
 	{
 		write(1, "0", 1);
 		(*count)++;
