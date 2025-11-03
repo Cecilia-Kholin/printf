@@ -1,60 +1,31 @@
-# =======================
-#     ft_printf Makefile
-# =======================
+NAME	=	libftprintf.a
 
-# ---- Config ----
-NAME        := libftprintf.a
-CC          := cc
-CFLAGS      := -Wall -Wextra -Werror
-AR          := ar
-ARFLAGS     := rcs
-RM          := rm -f
+CC = gcc
+CFLAGS = -Wall -Werror -Wextra
+RM = rm -rf
+AR = ar crs
 
-# ---- Rutas ----
-SRC_DIR     := src
-INC_DIR     := include
+SRC	=	ft_printf.c			\
+		ft_putchar.c		\
+		ft_putstr.c			\
+		ft_putnbr.c			\
+		ft_putunsigned.c	\
+		ft_hex.c	  		\
+		ft_hex_min.c		\
 
-# Ruta relativa a tu libft (ajústala si está en otro sitio)
-LIBFT_DIR   := ../libft
-LIBFT_A     := $(LIBFT_DIR)/libft.a
+OBJS = $(SRC:.c=.o)
 
-# Si libft tiene su propio include, añádelo también
-INCLUDES    := -I$(INC_DIR) -I$(LIBFT_DIR)/include
-
-# ---- Archivos ----
-SRCS        := \
-	$(SRC_DIR)/ft_printf.c \
-	$(SRC_DIR)/ft_utils.c
-OBJS        := $(SRCS:.c=.o)
-DEPS        := $(SRCS:.c=.d)
-
-# ---- Reglas ----
-.PHONY: all clean fclean re libft
+$(NAME): $(OBJS)
+	$(AR) $(NAME) $(OBJS)
 
 all: $(NAME)
 
-# compila libft si no existe
-libft:
-	@$(MAKE) -C $(LIBFT_DIR)
-
-# crea libftprintf.a combinando libft.a + tus objetos
-$(NAME): libft $(OBJS)
-	@echo "→ Creando $(NAME)"
-	cp $(LIBFT_A) $(NAME)
-	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
-
-# compilación individual con dependencias automáticas
-$(SRC_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
 clean:
-	$(RM) $(OBJS) $(DEPS)
-	$(MAKE) -C $(LIBFT_DIR) clean
+	$(RM) $(OBJS)
 
-fclean: clean
-	$(RM) $(NAME)
-	$(MAKE) -C $(LIBFT_DIR) fclean
+fclean:	clean
+	$(RM) $(NAME)		
 
-re: fclean all
+re:	fclean all
 
--include $(DEPS)
+.PHONY:	all clean fclean re
