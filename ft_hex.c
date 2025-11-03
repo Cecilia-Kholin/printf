@@ -6,7 +6,7 @@
 /*   By: usuario <usuario@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 11:47:47 by usuario           #+#    #+#             */
-/*   Updated: 2025/11/03 12:05:53 by usuario          ###   ########.fr       */
+/*   Updated: 2025/11/03 12:15:59 by usuario          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,15 @@ void	ft_hex(void *str, size_t *count)
 	unsigned long long	n;
 
 	i = 0;
-	n = (unsigned long long)str;
 	hex = "0123456789abcdef";
-	write(1, "0x", 2);
-	*count += 2;
 	if (str == 0)
 	{
 		write(1, "(nil)", 5);
-		(*count) += 5;
-		return ;
+		*count += 5;
 	}
+	n = (unsigned long long)str;
+	write(1, "0x", 2);
+	*count += 2;
 	while (n > 0)
 	{
 		buf[i++] = hex[n % 16];
