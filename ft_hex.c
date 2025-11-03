@@ -6,7 +6,7 @@
 /*   By: usuario <usuario@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 11:47:47 by usuario           #+#    #+#             */
-/*   Updated: 2025/11/03 12:15:59 by usuario          ###   ########.fr       */
+/*   Updated: 2025/11/03 12:17:35 by usuario          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_hex(void *str, size_t *count)
 	{
 		write(1, "(nil)", 5);
 		*count += 5;
+		return ;
 	}
 	n = (unsigned long long)str;
 	write(1, "0x", 2);
